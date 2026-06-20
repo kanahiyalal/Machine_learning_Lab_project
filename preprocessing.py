@@ -1,14 +1,4 @@
-"""
-Data preprocessing and feature engineering for the
-Car Price Prediction project.
 
-Handles:
-- Missing value imputation
-- Categorical encoding
-- Feature engineering (derived features)
-- Train/test splitting
-- Feature scaling (for Linear Regression)
-"""
 
 import pandas as pd
 import numpy as np
@@ -24,16 +14,12 @@ def load_raw_data(path="data/used_car_data.csv"):
 
 
 def engineer_features(df):
-    """Add derived features that help the models capture pricing logic."""
     df = df.copy()
 
-    # Mileage per year of age (driving intensity) — avoid divide by zero
     df["mileage_per_year"] = df["mileage_km"] / (df["age_years"] + 1)
 
-    # Power-to-engine ratio
     df["hp_per_liter"] = df["horsepower"] / df["engine_size_l"].replace(0, np.nan)
 
-    # Age bucket (captures non-linear depreciation bands)
     df["age_bucket"] = pd.cut(
         df["age_years"],
         bins=[-1, 2, 5, 10, 20],
