@@ -72,9 +72,6 @@ st.sidebar.caption(
     "Kanahiya Lal"
 )
 
-# ---------------------------------------------------------------
-# PAGE 1 — Prediction
-# ---------------------------------------------------------------
 if page == "Predict Price":
     st.title("Predict a Used Car's Price")
     st.write(
@@ -133,7 +130,6 @@ if page == "Predict Price":
         st.success(f"### Estimated Price: **${prediction:,.2f}** USD")
         st.caption(f"Prediction generated using: {model_choice} (trained locally)")
 
-        # Show predictions from both models for direct comparison
         st.markdown("#### Compare across both models")
         comparison = {}
         for name, m in models.items():
@@ -144,9 +140,7 @@ if page == "Predict Price":
         })
         st.table(comp_df)
 
-# ---------------------------------------------------------------
-# PAGE 2 — Model Comparison Dashboard
-# ---------------------------------------------------------------
+
 elif page == "Model Comparison Dashboard":
     st.title("Model Comparison Dashboard")
     st.write(
@@ -251,9 +245,7 @@ elif page == "Model Comparison Dashboard":
     plt.tight_layout()
     st.pyplot(fig)
 
-# ---------------------------------------------------------------
-# PAGE 3 — About the Dataset
-# ---------------------------------------------------------------
+
 elif page == "About the Dataset":
     st.title("About the Dataset")
     st.write(
