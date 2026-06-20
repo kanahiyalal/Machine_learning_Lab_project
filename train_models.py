@@ -64,7 +64,6 @@ def main():
     results = []
     predictions = {"y_test": y_test.reset_index(drop=True)}
 
-    # ---- Model 1: Linear Regression ----
     lr_pipeline = Pipeline(steps=[
         ("preprocessor", preprocessor),
         ("regressor", LinearRegression()),
@@ -96,11 +95,9 @@ def main():
     with open(f"{OUTPUTS_DIR}/metrics.json", "w") as f:
         json.dump(results, f, indent=2)
 
-    # ---- Save test predictions for dashboard plots ----
     pred_df = pd.DataFrame(predictions)
     pred_df.to_csv(f"{OUTPUTS_DIR}/test_predictions.csv", index=False)
 
-    # ---- Save feature importance (Random Forest) ----
     rf_step = rf_model.named_steps["regressor"]
     feature_names = rf_model.named_steps["preprocessor"].get_feature_names_out()
     importances = pd.DataFrame({
